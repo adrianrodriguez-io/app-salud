@@ -1,0 +1,115 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 1em;
+    text-align: center;
+}
+
+main {
+    padding: 1em;
+}
+
+h2 {
+    color: #4CAF50;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #45A049;
+}
+
+/* Lista general */
+.item-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.item-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.item-list li:hover {
+    background-color: #f1f1f1;
+}
+
+/* Checkbox */
+.item-list input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+/* Texto */
+.item-list .item-text {
+    flex: 1;
+    margin-left: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+.item-list .checked {
+    text-decoration: line-through;
+    color: #999;
+}
+
+
+/* Íconos (opcional) */
+.item-list .exercise-icon {
+    margin-right: 10px;
+    width: 24px;
+    height: 24px;
+}
+
+/* Usar el estilo general de items */
+.item-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.item-list li:hover {
+    background-color: #f1f1f1;
+}
+
+.item-list .checked {
+    text-decoration: line-through;
+    color: #999;
+}

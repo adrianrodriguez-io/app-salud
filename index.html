@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Salud</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <header>
+        <h1>Mi Plan de Salud</h1>
+    </header>
+    <main>
+        <section id="plan-semanal">
+            <h2>Plan Semanal</h2>
+        
+            <!-- Comidas principales -->
+            <h3>Comidas Principales</h3>
+            <ul id="comidas" class="item-list">
+                <!-- Los ítems se generarán dinámicamente -->
+            </ul>
+        
+            <!-- Snacks -->
+            <h3>Snacks</h3>
+            <ul id="snack-list" class="item-list">
+                <!-- Los ítems se generarán dinámicamente -->
+            </ul>
+        
+            <!-- Cenas -->
+            <h3>Cenas</h3>
+            <ul id="dinner-list" class="item-list">
+                <!-- Los ítems se generarán dinámicamente -->
+            </ul>
+        </section>
+          
+        <section id="rutina-ejercicios">
+            <h2>Rutina de Ejercicios</h2>
+            <ul id="ejercicios-list" class="item-list">
+                <!-- Los ejercicios se generarán dinámicamente desde app.js -->
+            </ul>
+        </section>
+        
+        <section id="progreso">
+            <h2>Progreso</h2>
+            <p>Peso actual: <span id="peso-actual">96 kg</span></p>
+            <button id="registrar-peso">Registrar peso</button>
+        </section>
+    </main>
+    <footer>
+        <p>© 2024 - Mi Plan de Salud</p>
+    </footer>
+    <script src="app.js"></script>
+</body>
+</html>
