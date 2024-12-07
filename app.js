@@ -3,6 +3,34 @@ let pesoInicial = null;
 let puntosGanados = 0;
 let totalItems = 0;
 
+let deferredPrompt;
+
+window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+
+    const installButton = document.createElement("button");
+    installButton.textContent = "Instalar App";
+    installButton.style.position = "fixed";
+    installButton.style.bottom = "20px";
+    installButton.style.right = "20px";
+    document.body.appendChild(installButton);
+
+    installButton.addEventListener("click", () => {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === "accepted") {
+                console.log("PWA instalada");
+            } else {
+                console.log("PWA no instalada");
+            }
+            deferredPrompt = null;
+            installButton.remove();
+        });
+    });
+});
+
+
 // Datos para retos diarios
 const retosDiarios = {
     "Día 1": {
