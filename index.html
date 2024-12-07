@@ -3,53 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plan de Salud</title>
+    <title>Reto Salud</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="manifest" href="manifest.json">
 </head>
 <body>
     <header>
-        <h1>Mi Plan de Salud</h1>
+        <h1>Reto Salud</h1>
     </header>
     <main>
-        <section id="plan-semanal">
-            <h2>Plan Semanal</h2>
-        
-            <!-- Comidas principales -->
-            <h3>Comidas Principales</h3>
-            <ul id="comidas" class="item-list">
-                <!-- Los ítems se generarán dinámicamente -->
-            </ul>
-        
-            <!-- Snacks -->
-            <h3>Snacks</h3>
-            <ul id="snack-list" class="item-list">
-                <!-- Los ítems se generarán dinámicamente -->
-            </ul>
-        
-            <!-- Cenas -->
-            <h3>Cenas</h3>
-            <ul id="dinner-list" class="item-list">
-                <!-- Los ítems se generarán dinámicamente -->
-            </ul>
+        <!-- Pantalla 1: Registro inicial -->
+        <section id="pantalla-registro" class="pantalla active">
+            <h2>Comienza tu Reto</h2>
+            <label for="peso-inicial-input">Peso inicial (kg):</label>
+            <input type="number" id="peso-inicial-input" placeholder="Introduce tu peso inicial">
+            <button id="comenzar-reto">Comenzar Reto</button>
         </section>
-          
-        <section id="rutina-ejercicios">
-            <h2>Rutina de Ejercicios</h2>
-            <ul id="ejercicios-list" class="item-list">
-                <!-- Los ejercicios se generarán dinámicamente desde app.js -->
-            </ul>
+
+        <!-- Pantalla 2: Plan diario -->
+        <section id="pantalla-plan" class="pantalla">
+            <h2>Plan Diario</h2>
+            <p><strong>Puntos:</strong> <span id="contador-puntos">0</span>/<span id="total-puntos">0</span></p>
+            <div id="dia-container"></div>
+            <button id="ver-resumen">Ver Resumen</button>
         </section>
-        
-        <section id="progreso">
-            <h2>Progreso</h2>
-            <p>Peso actual: <span id="peso-actual">96 kg</span></p>
-            <button id="registrar-peso">Registrar peso</button>
+
+        <!-- Pantalla 3: Resumen -->
+        <section id="pantalla-resumen" class="pantalla">
+            <h2>Resumen del Progreso</h2>
+            <ul id="lista-resumen"></ul>
+            <button id="volver-plan">Volver al Plan</button>
         </section>
     </main>
-    <footer>
-        <p>© 2024 - Mi Plan de Salud</p>
-    </footer>
     <script src="app.js"></script>
 </body>
 </html>

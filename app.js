@@ -1,172 +1,153 @@
-// Datos del plan
-// Datos
-const comidas = [
-    { dia: "Lunes", comida: "Pollo a la plancha (200 g), arroz integral (100 g cocido), brócoli al vapor (150 g)." },
-    { dia: "Martes", comida: "Pollo al curry (200 g), quinoa cocida (100 g), espinacas salteadas (150 g)." },
-    { dia: "Miércoles", comida: "Pescado blanco al horno (200 g), batata cocida (150 g), zanahorias al vapor (150 g)." },
-    { dia: "Jueves", comida: "Pollo a la plancha (200 g), arroz integral (100 g cocido), brócoli al vapor (150 g)." },
-    { dia: "Viernes", comida: "Pollo al horno con especias (200 g), lentejas cocidas (120 g), espinacas al vapor (150 g)." },
-    { dia: "Sábado", comida: "Pollo a la parrilla (200 g), puré de calabaza (150 g), espárragos al vapor (150 g)." },
-    { dia: "Domingo", comida: "Salmón a la parrilla (200 g), arroz integral (100 g cocido), brócoli al vapor (150 g)." }
-];
+// Variables globales
+let pesoInicial = null;
+let puntosGanados = 0;
+let totalItems = 0;
 
-const snacks = [
-    { dia: "Lunes", snack: "Yogur griego natural (150 g) + 1 puñado pequeño de nueces o almendras (15-20 g)." },
-    { dia: "Martes", snack: "Yogur griego natural (150 g) + 1 puñado pequeño de nueces o almendras (15-20 g)." },
-    { dia: "Miércoles", snack: "Yogur griego natural (150 g) + 1 puñado pequeño de nueces o almendras (15-20 g)." },
-    { dia: "Jueves", snack: "Yogur griego natural (150 g) + 1 puñado pequeño de nueces o almendras (15-20 g)." },
-    { dia: "Viernes", snack: "Yogur griego natural (150 g) + 1 puñado pequeño de nueces o almendras (15-20 g)." },
-    { dia: "Sábado", snack: "Yogur griego natural (150 g) + 1 puñado pequeño de nueces o almendras (15-20 g)." },
-    { dia: "Domingo", snack: "Yogur griego natural (150 g) + 1 puñado pequeño de nueces o almendras (15-20 g)." }
-];
+// Datos para retos diarios
+const retosDiarios = {
+    "Día 1": {
+        comida: ["Pollo a la plancha con boniato y espinacas"],
+        snack: ["Yogur griego natural con nueces"],
+        cena: ["Merluza al horno con ensalada 4 estaciones"],
+        ejercicio: ["Flexiones inclinadas (3x8)", "Remo inclinado con apoyo (3x12)"]
+    },
+    "Día 2": {
+        comida: ["Salteado de pollo con calabacín y zanahorias"],
+        snack: ["Yogur griego natural con pipas de girasol"],
+        cena: ["Salmón a la plancha con puré de calabaza"],
+        ejercicio: ["Press de pecho con mancuernas (3x12)", "Remo con banda (3x12)"]
+    },
+    "Día 3": {
+        comida: ["Merluza al horno con boniato y espárragos al vapor"],
+        snack: ["Fruta fresca con nueces"],
+        cena: ["Atún a la plancha con ensalada mixta (pepino, tomate y hojas verdes)"],
+        ejercicio: ["Sentadillas (3x15)", "Plancha abdominal (3x30 seg)"]
+    },
+    "Día 4": {
+        comida: ["Pollo al horno con calabaza asada y espinacas"],
+        snack: ["Yogur griego natural con pipas de girasol"],
+        cena: ["Merluza al vapor con calabacín salteado y zanahorias"],
+        ejercicio: ["Zancadas (3x12)", "Flexiones inclinadas (3x10)"]
+    },
+    "Día 5": {
+        comida: ["Salmón al horno con boniato y ensalada 4 estaciones"],
+        snack: ["Batido de frutas con yogur griego y nueces"],
+        cena: ["Pollo a la plancha con espárragos al vapor y calabacín asado"],
+        ejercicio: ["Cardio HIIT (20 minutos)", "Plancha abdominal (3x40 seg)"]
+    },
+    "Día 6": {
+        comida: ["Pollo al curry con puré de calabaza y zanahorias"],
+        snack: ["Yogur griego natural con pipas de girasol"],
+        cena: ["Atún al horno con ensalada mixta (pepino, tomate y hojas verdes)"],
+        ejercicio: ["Sentadillas con salto (3x12)", "Flexiones con rodillas apoyadas (3x8)"]
+    },
+    "Día 7": {
+        comida: ["Merluza al horno con boniato y espinacas salteadas"],
+        snack: ["Fruta fresca con yogur griego y nueces"],
+        cena: ["Salmón a la parrilla con espárragos al vapor y puré de calabaza"],
+        ejercicio: ["Caminata rápida (30 minutos)", "Estiramientos (10 minutos)"]
+    }
+};
 
-const cenas = [
-    { dia: "Lunes", cena: "Pollo al horno (150 g), calabacines a la plancha (150 g), ensalada mixta con hojas verdes y limón." },
-    { dia: "Martes", cena: "Pescado blanco (150 g), berenjenas al horno (150 g), espinacas salteadas." },
-    { dia: "Miércoles", cena: "Tortilla de 2 huevos + 2 claras con espinacas, ensalada de rúcula y tomate." },
-    { dia: "Jueves", cena: "Pollo a la plancha (150 g), champiñones y calabacines salteados (150 g)." },
-    { dia: "Viernes", cena: "Merluza al horno (150 g), espárragos al vapor (150 g), ensalada de rúcula y tomate." },
-    { dia: "Sábado", cena: "Pollo a la plancha (150 g), zanahorias al vapor (150 g), ensalada mixta." },
-    { dia: "Domingo", cena: "Salmón al horno (150 g), brócoli al vapor (150 g), ensalada de pepino y tomate." }
-];
-
-
-// Función para renderizar un ítem genérico
-function renderItem(listId, items, itemType) {
-    const list = document.getElementById(listId);
-
-    items.forEach((item) => {
-        const li = document.createElement("li");
-
-        // Checkbox
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-
-        // Texto
-        const text = document.createElement("span");
-        text.className = "item-text";
-        text.textContent = `${item.dia}: ${item[itemType]}`;
-
-        // Cambiar estilo al marcar el checkbox
-        checkbox.addEventListener("change", () => {
-            if (checkbox.checked) {
-                text.classList.add("checked");
-            } else {
-                text.classList.remove("checked");
-            }
-        });
-
-        // Estructura
-        li.appendChild(checkbox);
-        li.appendChild(text);
-        list.appendChild(li);
-    });
+// Actualizar el contador de puntos
+function actualizarPuntos() {
+    document.getElementById("contador-puntos").textContent = puntosGanados;
+    document.getElementById("total-puntos").textContent = totalItems;
 }
 
-// Renderizar las comidas principales, snacks y cenas
-renderItem("comidas", comidas, "comida");
-renderItem("snack-list", snacks, "snack");
-renderItem("dinner-list", cenas, "cena");
+// Navegación entre pantallas
+function mostrarPantalla(idPantalla) {
+    document.querySelectorAll(".pantalla").forEach((pantalla) => {
+        pantalla.classList.remove("active");
+    });
+    document.getElementById(idPantalla).classList.add("active");
+}
 
-const ejercicios = [
-    {
-        dia: "Lunes",
-        ejercicios: [
-            "Flexiones inclinadas (3x8-12) o con las rodillas apoyadas",
-            "Remo inclinado con apoyo (3x12-15)"
-        ]
-    },
-    {
-        dia: "Miércoles",
-        ejercicios: [
-            "Press de pecho con mancuernas (3x12)",
-            "Remo con banda elástica o mancuernas (3x12)"
-        ]
-    },
-    {
-        dia: "Viernes",
-        ejercicios: [
-            "Cardio HIIT (20 minutos): 30 segundos de marcha rápida o trote suave + 30 segundos de descanso, repetido en intervalos"
-        ]
-    },
-    {
-        dia: "Domingo",
-        ejercicios: [
-            "Sentadillas (sin peso, 3x12)",
-            "Flexiones inclinadas (3x8-12)",
-            "Remo con banda elástica o apoyo (3x12)"
-        ]
-    }
-];
+// Generar plan diario dinámicamente
+function cargarPlanDiario() {
+    const diaContainer = document.getElementById("dia-container");
+    diaContainer.innerHTML = ""; // Limpia el contenedor
 
+    Object.keys(retosDiarios).forEach((dia, index) => {
+        const diaDiv = document.createElement("div");
+        diaDiv.className = "dia";
 
-const ejerciciosList = document.getElementById("ejercicios-list");
-
-ejercicios.forEach((item) => {
-    const li = document.createElement("li");
-
-    // Encabezado con el día
-    const dayHeader = document.createElement("h4");
-    dayHeader.textContent = item.dia;
-
-    // Lista de ejercicios
-    const exerciseList = document.createElement("ul");
-    item.ejercicios.forEach((ejercicio) => {
-        const exerciseItem = document.createElement("li");
-
-        // Checkbox para marcar como completado
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-
-        // Texto del ejercicio
-        const exerciseText = document.createElement("span");
-        exerciseText.textContent = ejercicio;
-
-        // Estructura
-        exerciseItem.appendChild(checkbox);
-        exerciseItem.appendChild(exerciseText);
-        exerciseList.appendChild(exerciseItem);
-
-        // Cambiar estilo al marcar como completado
-        checkbox.addEventListener("change", () => {
-            exerciseText.classList.toggle("checked", checkbox.checked);
+        const diaHeader = document.createElement("h3");
+        diaHeader.textContent = dia;
+        diaHeader.addEventListener("click", () => {
+            diaContent.classList.toggle("active");
         });
+
+        const diaContent = document.createElement("div");
+        diaContent.className = `dia-content ${index === 0 ? "active" : ""}`; // Desplegar solo el Día 1 al inicio
+
+        ["comida", "snack", "cena", "ejercicio"].forEach((categoria) => {
+            const retoDiv = document.createElement("div");
+            retoDiv.className = "reto";
+
+            const retoHeader = document.createElement("h4");
+            retoHeader.textContent = categoria.charAt(0).toUpperCase() + categoria.slice(1);
+            retoDiv.appendChild(retoHeader);
+
+            const retoList = document.createElement("ul");
+            retoList.className = "reto-list";
+
+            retosDiarios[dia][categoria].forEach((item) => {
+                const li = document.createElement("li");
+
+                // Checkbox
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+
+                checkbox.addEventListener("change", () => {
+                    if (checkbox.checked) {
+                        puntosGanados++;
+                    } else {
+                        puntosGanados--;
+                    }
+                    actualizarPuntos();
+                });
+
+                // Texto
+                const text = document.createElement("span");
+                text.textContent = item;
+
+                li.appendChild(checkbox);
+                li.appendChild(text);
+                retoList.appendChild(li);
+
+                // Incrementar total de items
+                totalItems++;
+            });
+
+            retoDiv.appendChild(retoList);
+            diaContent.appendChild(retoDiv);
+        });
+
+        diaDiv.appendChild(diaHeader);
+        diaDiv.appendChild(diaContent);
+        diaContainer.appendChild(diaDiv);
     });
 
-    li.appendChild(dayHeader);
-    li.appendChild(exerciseList);
-    ejerciciosList.appendChild(li);
-});
-
-
-// Seguimiento del peso
-const pesoActual = document.getElementById("peso-actual");
-const registrarPesoBtn = document.getElementById("registrar-peso");
-
-registrarPesoBtn.addEventListener("click", () => {
-    const nuevoPeso = prompt("Introduce tu nuevo peso:");
-    if (nuevoPeso) {
-        pesoActual.textContent = `${nuevoPeso} kg`;
-        localStorage.setItem("pesoActual", nuevoPeso);
-    }
-});
-
-// Cargar peso desde almacenamiento local
-document.addEventListener("DOMContentLoaded", () => {
-    const pesoGuardado = localStorage.getItem("pesoActual");
-    if (pesoGuardado) {
-        pesoActual.textContent = `${pesoGuardado} kg`;
-    }
-});
-
-
-if ("serviceWorker" in navigator) {
-    navigator.serviceWorker
-        .register("./sw.js")
-        .then((registration) => {
-            console.log("Service Worker registrado con éxito:", registration.scope);
-        })
-        .catch((error) => {
-            console.error("Error al registrar el Service Worker:", error);
-        });
+    // Actualizar puntos al inicio
+    actualizarPuntos();
 }
+
+// Eventos
+document.getElementById("comenzar-reto").addEventListener("click", () => {
+    pesoInicial = parseFloat(document.getElementById("peso-inicial-input").value);
+    if (!isNaN(pesoInicial) && pesoInicial > 0) {
+        mostrarPantalla("pantalla-plan");
+        cargarPlanDiario();
+    } else {
+        alert("Por favor, introduce un peso válido.");
+    }
+});
+
+document.getElementById("ver-resumen").addEventListener("click", () => {
+    mostrarPantalla("pantalla-resumen");
+});
+
+document.getElementById("volver-plan").addEventListener("click", () => {
+    mostrarPantalla("pantalla-plan");
+});
